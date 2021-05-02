@@ -16,6 +16,18 @@
 				<button type="button" @click.stop="deleteItem(item.id)">löschen</button>
 			</div>
 		</div>
+		<!-- <div v-if="Object.keys(getCocktails).length" class="cocktails">
+			<div class="cocktail" v-for="item in getCocktails" :key="item._jv.id" :class="{'odd' : +item._jv.id % 2 === 0}">
+				<dl class="inline-list">
+					<dt>Id</dt>
+					<dd>{{ item._jv.id }}</dd>
+					<dt>Name</dt>
+					<dd>{{ item.name }}</dd>
+					<dt>Description</dt>
+					<dd>{{ item.description }}</dd>
+				</dl>
+			</div>
+		</div> -->
 
 		<p v-else>
 			{{ errorMessage || 'Cocktails werden geladen …' }}
@@ -55,12 +67,15 @@ export default {
 		return {
 			cocktails: [],
 			count: 0,
-			cocktail: null,
+			// cocktail: null,
 			errorMessage: ''
 		}
 	},
 
 	computed: {
+		// getCocktails: function() {
+		// 	return this.$store.getters['jv/get']('cocktails')
+		// },
 		remaining() {
 			return this.count - this.cocktails.length
 		}
@@ -99,13 +114,10 @@ export default {
 		// 		// console.error(error)
 		// 	})
 
-		/**
-		 * Der JSON-Response scheint der gleiche zu sein, egal, ob Axios normal oder das jsonapi-vuex-Modul verwendet wird.
-		 * Evtl. habe ich das Modul aber noch nicht tief genug getestet
-		 */
 		// this.$store.dispatch('jv/get', 'cocktails')
 		// 	.then((data) => {
 		// 		console.log(data)
+		// 		this.count = data._jv.json.meta.record_count
 		// 	})
 		// 	.catch(error => {
 		// 		console.error(error)

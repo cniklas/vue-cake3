@@ -21,6 +21,9 @@ html {
 	box-sizing: inherit;
 }
 
+pre {
+	text-align: left;
+}
 
 #app {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
