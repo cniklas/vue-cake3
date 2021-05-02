@@ -1,5 +1,5 @@
 html {
-	box-sizing: content-box;
+	box-sizing: border-box;
 }
 
 *,
@@ -21,19 +21,16 @@ html, body {
 	color: #2c3e50;
 	margin-top: 60px;
 }
-
+/*
 nav ul {
 	padding: 0;
-}
-
-nav li {
 	list-style: none;
 }
 
 .router-link-active {
 	font-weight: 500;
-}
-
+} */
+/*
 section {
 	margin: 1em auto;
 }
@@ -43,4 +40,47 @@ table {
 	margin: 1em auto;
 	width: 600px;
 	max-width: 90vw;
+} */
+
+a:visited {
+	color: inherit;
+}
+
+.button,
+button {
+	/* display: flex;
+	align-items: center;
+	justify-content: center; */
+	height: 2em;
+	padding: 0.25em 1.275em;
+	margin: 0.5em;
+	border-radius: 5px;
+	background: linear-gradient(to right, #16c0b0, #84cf6a);
+	font-family: inherit;
+	font-size: inherit;
+	font-size: 1em;
+	color: #fff;
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+
+form {
+	/* display: flex;
+	align-items: center;
+	flex-direction: column; */
+	width: 15em;
+	margin: 0 auto 2em;
+}
+
+form p {
+	color: red;
+}
+
+input {
+	display: block;
+	width: 100%;
+	padding: 0.5em;
+	margin-bottom: 1em;
+	font: inherit;
 }
