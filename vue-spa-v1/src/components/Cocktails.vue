@@ -117,6 +117,7 @@ export default {
 <style>
 .cocktails {
 	display: flex;
+	gap: .75rem;
 	flex-wrap: wrap;
 	justify-content: center;
 	text-align: left;
