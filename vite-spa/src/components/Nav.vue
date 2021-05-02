@@ -1,6 +1,6 @@
 <template>
 	<nav>
-		<router-link to="/">Vite Cocktails</router-link>
+		<router-link to="/">Home</router-link>
 		<ul>
 			<li v-for="route in routes" :key="route.to">
 				<router-link :to="route.to" :class="{ active: isActive(route.to) }">{{ route.text }}</router-link>
@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const routes = [
-	{ to: '/dashboard', text: 'Dashboard' },
+	{ to: '/cocktails', text: 'Cocktails' },
 	{ to: '/authenticate', text: 'Authenticate' }
 ]
 const router = useRouter()
