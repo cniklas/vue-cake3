@@ -20,8 +20,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from '../store'
 
 const router = useRouter()
 // const routes = [
@@ -33,10 +34,8 @@ const activeRoute = computed(() => router.currentRoute.value.path)
 // 'path' ist der Parameter, der an `isActive()` übergeben wird
 const isActive = path => path === activeRoute.value
 
-const user = computed(() => {
-	// return this.$store.state.user
-	return false
-})
+const store = useStore()
+const user = ref(store.user)
 
 const logout = () => {
 	// this.$store.dispatch('logout')
