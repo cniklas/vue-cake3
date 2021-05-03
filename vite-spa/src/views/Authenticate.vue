@@ -18,15 +18,14 @@ import { useStore } from '../store'
 import UserRegistration from '../components/UserRegistration.vue'
 import UserLogin from '../components/UserLogin.vue'
 
-const store = useStore()
-const isNewUser = ref(store.isNewUser)
+const { isNewUser, toggleIsNewUser } = useStore()
 
 const loginOrRegister = computed(() => {
 	return isNewUser.value ? UserRegistration : UserLogin
 })
 
 const toggleComponent = () => {
-	store.toggleIsNewUser(!isNewUser.value)
+	toggleIsNewUser(!isNewUser.value)
 }
 </script>
 

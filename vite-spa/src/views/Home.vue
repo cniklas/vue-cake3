@@ -10,12 +10,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useStore } from '../store'
 
-const store = useStore()
-const user = ref(store.user)
+const { user, toggleIsNewUser } = useStore()
+
 const setIsNewUser = (flag) => {
-	store.toggleIsNewUser(flag)
+	toggleIsNewUser(flag)
 }
 </script>

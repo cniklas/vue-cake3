@@ -1,15 +1,16 @@
 <template>
 	<h1>Login</h1>
 
-	<form @submit.prevent="login">
-		<label for="email">Email:</label>
-		<input v-model="email" type="email">
+	<form @submit.prevent="onSubmit" novalidate>
+		<label for="username">Username:</label>
+		<input v-model="username" type="text" id="username">
 
 		<label for="password">Password:</label>
-		<input v-model="password" type="password">
+		<input v-model="password" type="password" id="password">
 
-		<p v-if="status === 400">
-			Invalid login info.
+		<!-- <p v-if="status === 401">Invalid login info.</p> -->
+		<p v-if="loginError.code">
+			{{ loginError.code }} {{ loginError.message }}
 		</p>
 
 		<button type="submit">Login</button>
@@ -17,20 +18,46 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from '../store'
 
-const email = ref('')
+const router = useRouter()
+const { login } = useStore()
+
+const username = ref('')
 const password = ref('')
-const status = ref(null)
+// const status = ref(null)
+const loginError = reactive({
+	code: null,
+	message: ''
+})
 
-const login = () => {
+const onSubmit = async () => {
 	// this.$store
 	// 	.dispatch('login', {
-	// 		email: email.value,
+	// 		username: username.value,
 	// 		password: password.value
 	// 	})
 	// 	.then(() => { this.$router.push({ name: 'cocktails' }) })
 	// 	.catch(err => { status.value = err.response.status })
-	console.log('tbd: dispatch "login"')
+
+	// status.value = null
+	// loginError.code = null
+
+	try {
+		await login({
+			username: username.value,
+			password: password.value
+		})
+		// router.push({ name: 'cocktails' })
+		router.push({ name: 'home' })
+	}
+	catch (error) {
+		console.table(error.response)
+		// status.value = error.response.status
+		loginError.code = error.response.status
+		loginError.message = error.response.data.data.message
+	}
 }
 </script>

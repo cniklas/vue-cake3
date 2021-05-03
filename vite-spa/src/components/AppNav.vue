@@ -34,8 +34,7 @@ const activeRoute = computed(() => router.currentRoute.value.path)
 // 'path' ist der Parameter, der an `isActive()` übergeben wird
 const isActive = path => path === activeRoute.value
 
-const store = useStore()
-const user = ref(store.user)
+const { user } = useStore()
 
 const logout = () => {
 	// this.$store.dispatch('logout')

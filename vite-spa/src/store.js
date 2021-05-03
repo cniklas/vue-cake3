@@ -1,5 +1,6 @@
 // import { reactive, readonly } from 'vue'
 import { reactive, computed } from 'vue'
+import axios from 'axios'
 
 const state = reactive({
 	cocktails: [],
@@ -63,5 +64,14 @@ export const useStore = () => ({
 
 	toggleIsNewUser: (val) => {
 		state.isNewUser = !!val
+	},
+
+	login: async (credentials) => {
+		await axios.post('https://localhost.test/vue-cake3/api/users/token', credentials, {
+			headers: {
+				'accept': 'application/json',
+				'content-type': 'application/json'
+			}
+		})
 	}
 })
