@@ -1,4 +1,3 @@
-// import { reactive, readonly } from 'vue'
 import { reactive, computed } from 'vue'
 import axios from 'axios'
 
@@ -8,33 +7,11 @@ const state = reactive({
 	isNewUser: false
 });
 
-// const addCocktail = function(todo) {
-// 	if (todo) {
-// 		const newTodoObj = {
-// 			id: state.nextId,
-// 			description: todo,
-// 			done: false,
-// 		};
-
-// 		state.tasks.push(newTodoObj);
-// 		state.nextId++;
-// 	}
-// }
-
-// const deleteCocktail = function(task) {
-// 	state.tasks = state.tasks.filter((todoObj) => todoObj.id !== task.id);
-// }
-
-// const isNewUser = function(val) {
-// 	state.isNewUser = val
-// }
-
-// export default {
-// 	state: readonly(state),
-// 	addCocktail,
-// 	deleteCocktail
-// };
-
+const _saveUserData = (userData) => {
+	localStorage.setItem('user', JSON.stringify(userData))
+	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
+	state.user = userData
+}
 
 export const useStore = () => ({
 	// We’re using the computed method inside the useStore function so that our state not be updated from outside
@@ -66,12 +43,30 @@ export const useStore = () => ({
 		state.isNewUser = !!val
 	},
 
-	login: async (credentials) => {
-		await axios.post('https://localhost.test/vue-cake3/api/users/token', credentials, {
+	register: async (credentials) => {
+		const response = await axios.post('https://localhost.test/vue-cake3/api/users/register', { ...credentials, active: true }, {
 			headers: {
 				'accept': 'application/json',
 				'content-type': 'application/json'
 			}
 		})
+
+		_saveUserData({ username: credentials.username, token: response?.data?.data?.token ?? '' })
+	},
+
+	login: async (credentials) => {
+		const response = await axios.post('https://localhost.test/vue-cake3/api/users/token', credentials, {
+			headers: {
+				'accept': 'application/json',
+				'content-type': 'application/json'
+			}
+		})
+
+		_saveUserData({ username: credentials.username, token: response?.data?.data?.token ?? '' })
+	},
+
+	logout: () => {
+		localStorage.removeItem('user')
+		location.reload()
 	}
 })

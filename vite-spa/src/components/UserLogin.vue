@@ -2,15 +2,19 @@
 	<h1>Login</h1>
 
 	<form @submit.prevent="onSubmit" novalidate>
-		<label for="username">Username:</label>
-		<input v-model="username" type="text" id="username">
+		<div class="input-group">
+			<label for="username">Username:</label>
+			<input v-model="username" type="text" id="username">
+		</div>
 
-		<label for="password">Password:</label>
-		<input v-model="password" type="password" id="password">
+		<div class="input-group">
+			<label for="password">Password:</label>
+			<input v-model="password" type="password" id="password">
+		</div>
 
 		<!-- <p v-if="status === 401">Invalid login info.</p> -->
-		<p v-if="loginError.code">
-			{{ loginError.code }} {{ loginError.message }}
+		<p v-if="errorResponse.code">
+			{{ errorResponse.code }}: {{ errorResponse.message }}
 		</p>
 
 		<button type="submit">Login</button>
@@ -28,36 +32,27 @@ const { login } = useStore()
 const username = ref('')
 const password = ref('')
 // const status = ref(null)
-const loginError = reactive({
+const errorResponse = reactive({
 	code: null,
 	message: ''
 })
 
 const onSubmit = async () => {
-	// this.$store
-	// 	.dispatch('login', {
-	// 		username: username.value,
-	// 		password: password.value
-	// 	})
-	// 	.then(() => { this.$router.push({ name: 'cocktails' }) })
-	// 	.catch(err => { status.value = err.response.status })
-
 	// status.value = null
-	// loginError.code = null
+	// errorResponse.code = null
 
 	try {
 		await login({
 			username: username.value,
 			password: password.value
 		})
-		// router.push({ name: 'cocktails' })
-		router.push({ name: 'home' })
+		router.push({ name: 'cocktails' })
 	}
 	catch (error) {
-		console.table(error.response)
+		// console.table(error.response)
 		// status.value = error.response.status
-		loginError.code = error.response.status
-		loginError.message = error.response.data.data.message
+		errorResponse.code = error.response.status
+		errorResponse.message = error.response.data?.data?.message ?? ''
 	}
 }
 </script>

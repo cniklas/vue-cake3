@@ -1,15 +1,26 @@
 <template>
 	<h1>Registration</h1>
 
-	<form @submit.prevent="register">
-		<label for="email">Email:</label>
-		<input v-model="email" type="email">
+	<form @submit.prevent="onSubmit">
+		<div class="input-group">
+			<label for="username">Username:</label>
+			<input v-model="username" type="text" id="username">
+			<div v-if="errorResponse.errors?.username" class="input-error-message">
+				<span v-for="(error, i) in Object.keys(errorResponse.errors.username)" :key="`username-error-${i}`">{{ errorResponse.errors.username[error] }}</span>
+			</div>
+		</div>
 
-		<label for="password">Password:</label>
-		<input v-model="password" type="password">
+		<div class="input-group">
+			<label for="password">Password:</label>
+			<input v-model="password" type="password" id="password">
+			<div v-if="errorResponse.errors?.password" class="input-error-message">
+				<span v-for="(error, i) in Object.keys(errorResponse.errors.password)" :key="`username-error-${i}`">{{ errorResponse.errors.password[error] }}</span>
+			</div>
+		</div>
 
-		<p v-if="status === 400">
-			Please enter different info.
+		<!-- <p v-if="status === 401">Please enter different info.</p> -->
+		<p v-if="errorResponse.code">
+			{{ errorResponse.code }}: {{ errorResponse.message }}
 		</p>
 
 		<button type="submit">Register</button>
@@ -17,20 +28,43 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from '../store'
 
-const email = ref('')
+const router = useRouter()
+const { register } = useStore()
+
+const username = ref('')
 const password = ref('')
-const status = ref(null)
+// const status = ref(null)
+const errorResponse = reactive({
+	code: null,
+	message: '',
+	errors: null
+})
 
-const register = () => {
-	// this.$store
-	// 	.dispatch('register', {
-	// 		email: email.value,
-	// 		password: password.value
-	// 	})
-	// 	.then(() => { this.$router.push({ name: 'cocktails' }) })
-	// 	.catch(err => { status.value = err.response.status })
-	console.log('tbd: dispatch "register"')
+const onSubmit = async () => {
+	// status.value = null
+	// errorResponse.code = null
+	errorResponse.errors = null
+
+	try {
+		await register({
+			username: username.value,
+			password: password.value
+		})
+		router.push({ name: 'cocktails' })
+	}
+	catch (error) {
+		// console.table(error.response)
+		// status.value = error.response.status
+		errorResponse.code = error.response.status
+		errorResponse.message = error.response.data?.data?.message ?? ''
+
+		if (error.response.data?.data?.errorCount) {
+			errorResponse.errors = { ...error.response.data.data.errors }
+		}
+	}
 }
 </script>

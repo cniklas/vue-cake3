@@ -8,8 +8,8 @@
 		</ul> -->
 
 	 <template v-if="user">
-			<router-link to="cocktails" :class="{ active: isActive('cocktails') }">Cocktails</router-link>
-			<span class="nav-welcome">Hello, {{ user.name }}.</span>
+			<router-link to="cocktails">Cocktails</router-link>
+			<span class="nav-welcome">Hello, {{ user?.username }}</span>
 			<button type="button" class="logout-button" @click="logout">Log out</button>
 		</template>
 
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '../store'
 
@@ -34,12 +34,7 @@ const activeRoute = computed(() => router.currentRoute.value.path)
 // 'path' ist der Parameter, der an `isActive()` übergeben wird
 const isActive = path => path === activeRoute.value
 
-const { user } = useStore()
-
-const logout = () => {
-	// this.$store.dispatch('logout')
-	console.log('tbd: dispatch "logout"')
-}
+const { user, logout } = useStore()
 </script>
 
 <style lang="scss" scoped>
@@ -58,7 +53,7 @@ nav {
 
 a {
 	color: inherit;
-	margin: auto 0.8em;
+	margin: 0 0.8em;
 	text-decoration: none;
 	border-bottom: 2px solid transparent;
 }
@@ -76,6 +71,8 @@ button,
 	text-decoration: none;
 	color: inherit;
 	height: auto;
+	margin-top: unset;
+	margin-bottom: unset;
 	margin-left: auto;
 
 	&.router-link-active {
