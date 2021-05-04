@@ -51,7 +51,9 @@ export const useStore = () => ({
 			}
 		})
 
-		_saveUserData({ username: credentials.username, token: response?.data?.data?.token ?? '' })
+		if (response.data?.data?.token) {
+			_saveUserData({ username: credentials.username, token: response.data.data.token })
+		}
 	},
 
 	login: async (credentials) => {
@@ -62,7 +64,35 @@ export const useStore = () => ({
 			}
 		})
 
-		_saveUserData({ username: credentials.username, token: response?.data?.data?.token ?? '' })
+		if (response.data?.data?.token) {
+			_saveUserData({ username: credentials.username, token: response.data.data.token })
+		}
+	},
+
+	autoLogin() {
+		// const token = localStorage.getItem('token');
+		// if (!token) {
+		// 	return;
+		// }
+		const user = localStorage.getItem('user')
+			? JSON.parse(localStorage.getItem('user'))
+			: {}
+		if (!user.token) {
+			return
+		}
+
+		// const expiresOn = localStorage.getItem('expiresOn')
+		// const now = new Date()
+		// if (expiresOn <= now) {
+		// 	return false
+		// }
+
+		// const userId = localStorage.getItem('userId');
+		// if (userId) {
+		// 	console.info('autoLogin');
+		// 	commit('authUser', { token, userId })
+		// }
+		_saveUserData({ username: user.username ?? '', token: user.token })
 	},
 
 	logout: () => {

@@ -1,9 +1,12 @@
 import { createWebHistory, createRouter } from 'vue-router'
+import { useStore } from './store'
 import Home from './views/Home.vue'
 // import Cocktails from './views/Cocktails.vue'
 const Cocktails = () => import('./views/Cocktails.vue')
 // import Authenticate from './views/Authenticate.vue'
 const Authenticate = () => import('./views/Authenticate.vue')
+
+const { user } = useStore()
 
 const history = createWebHistory()
 const routes = [
@@ -22,9 +25,8 @@ router.beforeEach((to, from, next) => {
 	// redirect to auth page if user is not logged in and trying to access a restricted page
 	const publicPages = ['/authenticate', '/']
 	const authRequired = !publicPages.includes(to.path)
-	const isLoggedIn = localStorage.getItem('user')
 
-	if (authRequired && !isLoggedIn) {
+	if (authRequired && !user.value) {
 		return next('/authenticate')
 	}
 
