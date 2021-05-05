@@ -1,5 +1,6 @@
 import { reactive, computed } from 'vue'
 import axios from 'axios'
+import JsonApiResponseConverter from 'json-api-response-converter'
 
 const state = reactive({
 	cocktails: [],
@@ -34,7 +35,7 @@ export const useStore = () => ({
 		const response = await axios.get('/cocktails')
 
 		// console.table(response);
-		state.cocktails = response.data.data
+		state.cocktails = new JsonApiResponseConverter(response.data).formattedResponse
 		state.recordCount = response.data.meta?.record_count ?? null
 		state.hasLoaded = true
 	},

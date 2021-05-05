@@ -1,38 +1,28 @@
 <template>
 	<nav>
 		<router-link to="/">Home</router-link>
-		<!-- <ul>
-			<li v-for="route in routes" :key="route.to">
-				<router-link :to="route.to" :class="{ active: isActive(route.to) }">{{ route.text }}</router-link>
-			</li>
-		</ul> -->
 
 	 <template v-if="user">
-			<router-link to="cocktails">Cocktails</router-link>
+			<router-link to="/cocktails">Cocktails</router-link>
 			<span class="nav-welcome">Hello, {{ user?.username }}</span>
-			<button type="button" class="logout-button" @click="logout">Log out</button>
+			<button type="button" @click="logout">Log out</button>
 		</template>
 
 		<template v-else>
-			<router-link to="authenticate" class="button" :class="{ active: isActive('authenticate') }">Login</router-link>
+			<router-link to="/authenticate" class="button">Login</router-link>
 		</template>
 	</nav>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+// import { computed } from 'vue'
+// import { useRouter } from 'vue-router'
 import { useStore } from '../store'
 
-const router = useRouter()
-// const routes = [
-// 	{ to: '/cocktails', text: 'Cocktails' },
-// 	{ to: '/authenticate', text: 'Authenticate' }
-// ]
-// the activeRoute value is created as computed so that it’s automatically updated whenever the router object changes
-const activeRoute = computed(() => router.currentRoute.value.path)
-// 'path' ist der Parameter, der an `isActive()` übergeben wird
-const isActive = path => path === activeRoute.value
+// const router = useRouter()
+// // the activeRoute value is created as computed so that it’s automatically updated whenever the router object changes
+// const activeRoute = computed(() => router.currentRoute.value.path)
+// const isActive = path => path === activeRoute.value
 
 const { user, logout } = useStore()
 </script>
@@ -43,6 +33,7 @@ nav {
 	align-items: center;
 	padding: 0.657em 1em;
 	background: linear-gradient(to right, #16c0b0, #84cf6a);
+	color: #0d0d0d;
 }
 
 .nav-welcome {
@@ -66,7 +57,7 @@ a {
 
 button,
 .button {
-	border: 0;
+	border: none;
 	background: none #fff;
 	text-decoration: none;
 	color: inherit;
@@ -78,10 +69,6 @@ button,
 	&.router-link-active {
 		color: inherit;
 	}
-}
-
-.logout-button {
-	cursor: pointer;
 }
 
 .nav-welcome + button {

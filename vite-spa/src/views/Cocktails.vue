@@ -1,72 +1,42 @@
 <template>
 	<h1>Cocktails</h1>
 
-	<pre>{{ remaining }}</pre>
-	<pre>{{ cocktails }}</pre>
 	<div v-if="hasLoaded" class="cocktails">
-		<!-- <div class="cocktail" v-for="item in cocktails" :key="item.id" :class="{'odd' : item.odd}">
-			<router-link :to="{ name: 'cocktails-edit', params: { id: item.id } }" tag="dl" class="inline-list is-link">
-				<dt>Id</dt>
-				<dd>{{ item.id }}</dd>
-				<dt>Name</dt>
-				<dd>{{ item.attributes.name }}</dd>
-				<dt>Description</dt>
-				<dd>{{ item.attributes.description }}</dd>
+		<div class="cocktail" v-for="item in cocktails" :key="item.id">
+			<!-- name: 'cocktails-edit' -->
+			<router-link :to="{ name: 'home', params: { id: item.id } }" custom v-slot="{ navigate }">
+				<dl @click="navigate" class="inline-list is-link">
+					<dt>Id</dt>
+					<dd>{{ item.id }}</dd>
+					<dt>Name</dt>
+					<dd>{{ item.name }}</dd>
+					<dt>Description</dt>
+					<dd>{{ item.description }}</dd>
+				</dl>
 			</router-link>
 
 			<button type="button" @click.stop="deleteItem(item.id)">löschen</button>
-		</div> -->
-	</div>
-	<!-- <div v-if="Object.keys(getCocktails).length" class="cocktails">
-		<div class="cocktail" v-for="item in getCocktails" :key="item._jv.id" :class="{'odd' : +item._jv.id % 2 === 0}">
-			<dl class="inline-list">
-				<dt>Id</dt>
-				<dd>{{ item._jv.id }}</dd>
-				<dt>Name</dt>
-				<dd>{{ item.name }}</dd>
-				<dt>Description</dt>
-				<dd>{{ item.description }}</dd>
-			</dl>
 		</div>
-	</div> -->
+	</div>
 
 	<p v-else :class="{'error-message': errorResponse.code }">
 		{{ errorResponse.code && errorResponse.message ? `${errorResponse.code}: ${errorResponse.message}` : 'Cocktails werden geladen …' }}
 	</p>
 
-	<!-- <p v-if="remaining > 0">
+	<p v-if="remaining > 0">
 		<strong>… und {{ remaining }} weitere …</strong>
-	</p> -->
+	</p>
 </template>
 
 <script setup>
 import { reactive, computed, onMounted } from 'vue'
 import { useStore } from '../store'
-// export default {
-// 	data () {
-// 		return {
-// 			cocktails: [],
-// 			count: 0,
-// 			// cocktail: null,
-// 			errorMessage: ''
-// 		}
-// 	},
+
 const { cocktails, recordCount, hasLoaded, fetchCocktails } = useStore()
 const errorResponse = reactive({
 	code: null,
-	message: '',
-	// errors: null
+	message: ''
 })
-
-const remaining = computed(() => recordCount.value ? recordCount.value - cocktails.value.length : 0 )
-// 	computed: {
-// 		// getCocktails: function() {
-// 		// 	return this.$store.getters['jv/get']('cocktails')
-// 		// },
-// 		remaining() {
-// 			return this.count - this.cocktails.length
-// 		}
-// 	},
 
 // 	methods: {
 // 		deleteItem(id) {
@@ -79,19 +49,6 @@ const remaining = computed(() => recordCount.value ? recordCount.value - cocktai
 // 				})
 // 		}
 // 	},
-
-// 	mounted () {
-// 		this.$http.get('/cocktails')
-// 			.then(({data}) => {
-// 				this.cocktails = data.data
-// 				this.cocktails.map((item, index) => item.odd = !(index % 2))
-// 				this.count = data.meta.record_count
-// 			})
-// 			.catch((error) => {
-// 				if (error.response && error.response.data && error.response.data.errors && error.response.data.errors.length) {
-// 					this.errorMessage = error.response.data.errors[0].detail
-// 				}
-// 			})
 const getCocktails = async () => {
 	errorResponse.code = null
 	// errorResponse.errors = null
@@ -111,6 +68,20 @@ const getCocktails = async () => {
 		}
 	}
 }
+const remaining = computed(() => recordCount.value ? recordCount.value - cocktails.value.length : 0 )
+
+// 	mounted () {
+// 		this.$http.get('/cocktails')
+// 			.then(({data}) => {
+// 				this.cocktails = data.data
+// 				this.cocktails.map((item, index) => item.odd = !(index % 2))
+// 				this.count = data.meta.record_count
+// 			})
+// 			.catch((error) => {
+// 				if (error.response && error.response.data && error.response.data.errors && error.response.data.errors.length) {
+// 					this.errorMessage = error.response.data.errors[0].detail
+// 				}
+// 			})
 
 // 		// this.$http.get('/cocktails/3')
 // 		// 	.then(({data}) => {
@@ -135,7 +106,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cocktails {
 	display: flex;
 	gap: .75rem;
@@ -145,16 +116,31 @@ onMounted(() => {
 }
 
 .cocktail {
-	background-color: hsl(153, 37%, 71%);
+	// background-color: hsl(153, 37%, 71%);
+	background: conic-gradient(from -120deg at center 80%, #16c0b0, #84cf6a, #16c0b0);
+	color: #0d0d0d;
 	flex: 0 1 220px;
 	padding: .75rem;
+	border-bottom-left-radius: calc(.75rem + 5px);
+	border-bottom-right-radius: calc(.75rem + 5px);
 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 
-	&.odd {
-		background-color: hsl(153, 60%, 80%)
+	&:nth-child(odd) {
+		// background-color: hsl(153, 60%, 80%)
+		position: relative;
+		mix-blend-mode: lighten;
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			border-radius: inherit;
+			background: linear-gradient(30deg, hsl(174deg 79% 42%), transparent);
+		}
 	}
 
 	&:only-child {
@@ -162,20 +148,6 @@ onMounted(() => {
 	}
 }
 
-// .cocktail.odd {
-// 	background-color: hsl(153, 60%, 80%)
-// }
-
-// .cocktail:only-child {
-// 	background-color: hsl(8, 60%, 80%);
-// }
-
-// .inline-list { margin: 0 0 1rem; }
-// .inline-list dt, .inline-list dd { display: inline; margin: 0; }
-// .inline-list dt { font-weight: 700; }
-// .inline-list dt:after { content: ':'; }
-// .inline-list dd:before { content: '\0020'; }
-// .inline-list dd:after { content: '\a'; white-space: pre; }
 .inline-list {
 	margin: 0 0 1rem;
 
@@ -206,5 +178,12 @@ onMounted(() => {
 
 .is-link {
 	cursor: pointer;
+}
+
+button,
+.button {
+	background: none #fff;
+	color: inherit;
+	margin: 0;
 }
 </style>

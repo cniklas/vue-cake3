@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "json-api-response-converter": "^1.6.0",
     "vue": "^3.0.5",
     "vue-router": "4"
   },

@@ -281,6 +281,11 @@ is-number@^7.0.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
+json-api-response-converter@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/json-api-response-converter/-/json-api-response-converter-1.6.0.tgz#66fc07c92d39da8a0a0d2eebc10b8b1b9b38d962"
+  integrity sha512-PetQPJUmimf5OuDPkjWij85LdNKctG9SnGQ9EfdOQxt2nwEviraXGekEgJcEwsgeKxnrG2zD7D+nQJ6YAkzM7Q==
+
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
