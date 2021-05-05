@@ -18,8 +18,3 @@ onBeforeMount(() => {
 	autoLogin()
 })
 </script>
-
-<!--
-<style>
-/* @import './index.css'; */
-</style> -->

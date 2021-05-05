@@ -13,7 +13,7 @@
 		</div>
 
 		<!-- <p v-if="status === 401">Invalid login info.</p> -->
-		<p v-if="errorResponse.code">
+		<p v-if="errorResponse.code" class="error-message">
 			{{ errorResponse.code }}: {{ errorResponse.message }}
 		</p>
 

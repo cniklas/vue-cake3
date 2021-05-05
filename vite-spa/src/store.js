@@ -3,22 +3,40 @@ import axios from 'axios'
 
 const state = reactive({
 	cocktails: [],
+	recordCount: null,
+	hasLoaded: false,
 	user: null,
 	isNewUser: false
 });
 
 const _saveUserData = (userData) => {
 	localStorage.setItem('user', JSON.stringify(userData))
-	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
 	state.user = userData
+
+	axios.defaults.baseURL = 'https://localhost.test/vue-cake3/api'
+	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
+	// axios.defaults.headers.common['Authorization'] = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTU5NTg3NDU4OH0.e8MfoPPAU7pbqr34N7frBG_pbKCi3Ah6Pc0SHfquWQU'
+	axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+
+	axios.defaults.headers.post['Content-Type'] = 'application/vnd.api+json'
+	axios.defaults.headers.patch['Content-Type'] = 'application/vnd.api+json'
+	// https://stackoverflow.com/a/51098921
+	axios.defaults.headers.delete['Access-Control-Allow-Origin'] = 'https://localhost.test'
 }
 
 export const useStore = () => ({
 	// We’re using the computed method inside the useStore function so that our state not be updated from outside
 	cocktails: computed(() => state.cocktails),
+	recordCount: computed(() => state.recordCount),
+	hasLoaded: computed(() => state.hasLoaded),
 
-	loadCocktails: () => {
-		state.cocktails = []
+	fetchCocktails: async () => {
+		const response = await axios.get('/cocktails')
+
+		// console.table(response);
+		state.cocktails = response.data.data
+		state.recordCount = response.data.meta?.record_count ?? null
+		state.hasLoaded = true
 	},
 
 	addCocktail: (cocktail) => {
@@ -32,7 +50,7 @@ export const useStore = () => ({
 		]
 	},
 
-	removeCocktail: (cocktail) => {
+	deleteCocktail: (cocktail) => {
 		state.cocktails = state.cocktails.filter((c) => c.id !== cocktail.id)
 	},
 

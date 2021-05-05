@@ -14,7 +14,7 @@ Vue.prototype.$http.defaults.headers.patch['Content-Type'] = 'application/vnd.ap
 // https://stackoverflow.com/a/51098921
 Vue.prototype.$http.defaults.headers.delete['Access-Control-Allow-Origin'] = 'https://localhost.test'
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTYyMDUwNDQ0OX0.5bZnlUWIVeT3FEwdzkv820HqKF4z71OqoCeGCRR_X74'
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTU5NTg3NDU4OH0.e8MfoPPAU7pbqr34N7frBG_pbKCi3Ah6Pc0SHfquWQU'
 Vue.prototype.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 new Vue({

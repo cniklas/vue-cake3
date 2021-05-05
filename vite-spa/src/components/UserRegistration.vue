@@ -19,7 +19,7 @@
 		</div>
 
 		<!-- <p v-if="status === 401">Please enter different info.</p> -->
-		<p v-if="errorResponse.code">
+		<p v-if="errorResponse.code" class="error-message">
 			{{ errorResponse.code }}: {{ errorResponse.message }}
 		</p>
 

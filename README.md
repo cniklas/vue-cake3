@@ -84,8 +84,8 @@ JWT: [JSON Web Token](http://jwt.io/)
 
 ```json
 {
-	"username": "mike",
-	"password": "test123"
+	"username": "cniklas",
+	"password": "123456"
 }
 ```
 
@@ -117,7 +117,7 @@ Für __Register- und Token-Requests__ (Teil 4) bleiben Accept-Header und Content
 - HTTP Method: `GET`
 - Accept Header: `application/vnd.api+json`
 - Authorization Header: `Bearer {YOUR-JWT-TOKEN}`  
-z.B. `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTYyMDUwNDQ0OX0.5bZnlUWIVeT3FEwdzkv820HqKF4z71OqoCeGCRR_X74`
+z.B. `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTU5NTg3NDU4OH0.e8MfoPPAU7pbqr34N7frBG_pbKCi3Ah6Pc0SHfquWQU`
 
 
 ## Teil 6. Frontend einrichten
