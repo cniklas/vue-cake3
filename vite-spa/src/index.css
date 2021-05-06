@@ -80,6 +80,10 @@ form {
 	text-align: left;
 }
 
+label {
+	font-weight: 500;
+}
+
 input {
 	display: block;
 	width: 100%;

@@ -3,8 +3,7 @@
 
 	<div v-if="hasLoaded" class="cocktails">
 		<div class="cocktail" v-for="item in cocktails" :key="item.id">
-			<!-- name: 'cocktails-edit' -->
-			<router-link :to="{ name: 'home', params: { id: item.id } }" custom v-slot="{ navigate }">
+			<router-link :to="{ name: 'edit-cocktail', params: { id: item.id } }" custom v-slot="{ navigate }">
 				<dl @click="navigate" class="inline-list is-link">
 					<dt>Id</dt>
 					<dd>{{ item.id }}</dd>

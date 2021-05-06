@@ -1,18 +1,26 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { useStore } from './store'
 import Home from './views/Home.vue'
-// import Cocktails from './views/Cocktails.vue'
-const Cocktails = () => import('./views/Cocktails.vue')
 // import Authenticate from './views/Authenticate.vue'
 const Authenticate = () => import('./views/Authenticate.vue')
+const Cocktails = () => import('./views/Cocktails.vue')
+const ListCocktails = () => import('./views/ListCocktails.vue')
+const EditCocktail = () => import('./views/EditCocktail.vue')
 
 const { user } = useStore()
 
 const history = createWebHistory()
 const routes = [
 	{ path: '/', name: 'home', component: Home },
-	{ path: '/cocktails', name: 'cocktails', component: Cocktails },
 	{ path: '/authenticate', component: Authenticate },
+	// { path: '/cocktails', name: 'cocktails', component: Cocktails },
+	// { path: '/:id', name: 'edit-cocktail', component: EditCocktail, props: true },
+	{ path: '/cocktails', component: Cocktails,
+		children: [
+			{ path: '', name: 'cocktails', component: ListCocktails },
+			{ path: ':id', name: 'edit-cocktail', component: EditCocktail, props: true }
+		]
+	},
 
 	// @deprecated
 	// https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes
