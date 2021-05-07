@@ -13,8 +13,8 @@
 		</div>
 
 		<!-- <p v-if="status === 401">Invalid login info.</p> -->
-		<p v-if="errorResponse.code" class="error-message">
-			{{ errorResponse.code }}: {{ errorResponse.message }}
+		<p v-if="errorCode" class="error-message">
+			{{ errorCode }}: {{ errorMessage }}
 		</p>
 
 		<button type="submit">Login</button>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '../store'
 
@@ -32,14 +32,12 @@ const { login } = useStore()
 const username = ref('')
 const password = ref('')
 // const status = ref(null)
-const errorResponse = reactive({
-	code: null,
-	message: ''
-})
+const errorCode = ref(null)
+const errorMessage = ref('')
 
 const onSubmit = async () => {
 	// status.value = null
-	// errorResponse.code = null
+	// errorCode.value = null
 
 	try {
 		await login({
@@ -49,10 +47,13 @@ const onSubmit = async () => {
 		router.push({ name: 'cocktails' })
 	}
 	catch (error) {
+		/**
+		 * error.message `Network Error`, wenn Server nicht erreichbar
+		 */
 		// console.table(error.response)
 		// status.value = error.response.status
-		errorResponse.code = error.response.status
-		errorResponse.message = error.response.data?.data?.message ?? ''
+		errorCode.value = error.response.status
+		errorMessage.value = error.response.data?.data?.message ?? ''
 	}
 }
 </script>

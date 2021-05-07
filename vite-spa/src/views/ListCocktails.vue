@@ -18,8 +18,8 @@
 		</div>
 	</div>
 
-	<p v-else :class="{'error-message': errorResponse.code }">
-		{{ errorResponse.code && errorResponse.message ? `${errorResponse.code}: ${errorResponse.message}` : 'Cocktails werden geladen …' }}
+	<p v-else :class="{'error-message': errorCode }">
+		{{ errorCode && errorMessage ? `${errorCode}: ${errorMessage}` : 'Cocktails werden geladen …' }}
 	</p>
 
 	<p v-if="remaining > 0">
@@ -28,14 +28,12 @@
 </template>
 
 <script setup>
-import { reactive, computed, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useStore } from '../store'
 
 const { cocktails, recordCount, hasLoaded, fetchCocktails } = useStore()
-const errorResponse = reactive({
-	code: null,
-	message: ''
-})
+const errorCode = ref(null)
+const errorMessage = ref('')
 
 // 	methods: {
 // 		deleteItem(id) {
@@ -49,8 +47,7 @@ const errorResponse = reactive({
 // 		}
 // 	},
 const getCocktails = async () => {
-	errorResponse.code = null
-	// errorResponse.errors = null
+	errorCode.value = null
 
 	if (!hasLoaded.value) {
 		try {
@@ -58,11 +55,11 @@ const getCocktails = async () => {
 		}
 		catch (error) {
 			// console.table(error.response)
-			errorResponse.code = error.response.status
-			errorResponse.message = error.response.statusText ?? ''
+			errorCode.value = error.response.status
+			errorMessage.value = error.response.statusText ?? ''
 
 			if (error.response.data?.errors?.length) {
-				errorResponse.message = error.response.data.errors[0].detail ?? errorResponse.message
+				errorMessage.value = error.response.data.errors[0].detail ?? errorMessage.value
 			}
 		}
 	}
