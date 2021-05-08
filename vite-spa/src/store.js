@@ -40,6 +40,20 @@ export const useStore = () => ({
 		state.hasLoaded = true
 	},
 
+	editCocktail: (cocktail) => {
+		console.log(cocktail);
+
+		// const data = JSON.stringify({ data: { type: 'cocktails', id: this.id, attributes: this.cocktail } })
+		// this.$http
+		// 	// .patch('/cocktails/', data)
+		// 	.patch(`/cocktails/${this.id}`, data)
+		// 	.then(() => {
+		// 		this.$router.push({ name: 'home' })
+		// 	})
+		// 	.catch(() => {
+		// 	})
+	},
+
 	addCocktail: (cocktail) => {
 		/**
 		 * We’re changing the cocktails array in an immutable way, always attributing to it a new array instead of changing the current value.

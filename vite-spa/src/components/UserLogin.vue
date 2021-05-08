@@ -4,12 +4,12 @@
 	<form @submit.prevent="onSubmit" novalidate>
 		<div class="input-group">
 			<label for="username">Username:</label>
-			<input v-model="username" type="text" id="username">
+			<input v-model.trim="username" type="text" id="username">
 		</div>
 
 		<div class="input-group">
 			<label for="password">Password:</label>
-			<input v-model="password" type="password" id="password">
+			<input v-model.trim="password" type="password" id="password">
 		</div>
 
 		<!-- <p v-if="status === 401">Invalid login info.</p> -->

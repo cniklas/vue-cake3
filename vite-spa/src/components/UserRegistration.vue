@@ -4,7 +4,7 @@
 	<form @submit.prevent="onSubmit">
 		<div class="input-group">
 			<label for="username">Username:</label>
-			<input v-model="username" type="text" id="username">
+			<input v-model.trim="username" type="text" id="username">
 			<div v-if="validationErrors?.username" class="input-error-message">
 				<span v-for="(error, i) in Object.keys(validationErrors.username)" :key="`username-error-${i}`">{{ validationErrors.username[error] }}</span>
 			</div>
@@ -12,7 +12,7 @@
 
 		<div class="input-group">
 			<label for="password">Password:</label>
-			<input v-model="password" type="password" id="password">
+			<input v-model.trim="password" type="password" id="password">
 			<div v-if="validationErrors?.password" class="input-error-message">
 				<span v-for="(error, i) in Object.keys(validationErrors.password)" :key="`username-error-${i}`">{{ validationErrors.password[error] }}</span>
 			</div>
