@@ -41,27 +41,31 @@ const password = ref('')
 const errorCode = ref(null)
 const errorMessage = ref('')
 const validationErrors = ref(null)
+const isFormLocked = ref(false)
 
 const onSubmit = async () => {
-	// status.value = null
-	// errorCode.value = null
-	validationErrors.value = null
+	if (!isFormLocked.value) {
+		isFormLocked.value = true
+		// status.value = null
+		// errorCode.value = null
+		validationErrors.value = null
 
-	try {
-		await register({
-			username: username.value,
-			password: password.value
-		})
-		router.push({ name: 'cocktails' })
-	}
-	catch (error) {
-		// console.table(error.response)
-		// status.value = error.response.status
-		errorCode.value = error.response.status
-		errorMessage.value = error.response.data?.data?.message ?? ''
+		try {
+			await register({
+				username: username.value,
+				password: password.value
+			})
+			router.push({ name: 'cocktails' })
+		}
+		catch (error) {
+			// console.table(error.response)
+			// status.value = error.response.status
+			errorCode.value = error.response.status
+			errorMessage.value = error.response.data?.data?.message ?? ''
 
-		if (error.response.data?.data?.errorCount) {
-			validationErrors.value = { ...error.response.data.data.errors }
+			if (error.response.data?.data?.errorCount) {
+				validationErrors.value = { ...error.response.data.data.errors }
+			}
 		}
 	}
 }

@@ -39,9 +39,10 @@ const isFormLocked = ref(false)
 const { cocktails, hasLoaded, editCocktail } = useStore()
 const getCocktail = () => {
 	if (hasLoaded.value) {
+		// prop `id`: String
+		// item.id: Number
 		const cocktail = cocktails.value.find(item => item.id === +id.value)
 		if (cocktail !== undefined) {
-			form.id = cocktail.id
 			form.name = cocktail.name
 			form.description = cocktail.description
 		}
@@ -52,13 +53,19 @@ const getCocktail = () => {
 	}
 }
 
-const onSubmit = () => {
+const onSubmit = async () => {
 	if (!isFormLocked.value) {
 		isFormLocked.value = true
 
 		// submit.value.setAttribute('disabled', 'disabled')
 		// @todo bei SUCCESS Formular mit bounce back nach oben(?) rausfahren
-		editCocktail({ ...toRaw(form) })
+		try {
+			await editCocktail(id.value, { ...toRaw(form) })
+			router.push({ name: 'cocktails' })
+		}
+		catch (error) {
+			console.table(error.response)
+		}
 	}
 }
 
@@ -66,7 +73,3 @@ onMounted(() => {
 	getCocktail()
 })
 </script>
-
-<style lang="scss" scoped>
-
-</style>

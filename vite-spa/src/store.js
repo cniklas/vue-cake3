@@ -8,7 +8,7 @@ const state = reactive({
 	hasLoaded: false,
 	user: null,
 	isNewUser: false
-});
+})
 
 const _saveUserData = (userData) => {
 	localStorage.setItem('user', JSON.stringify(userData))
@@ -40,18 +40,15 @@ export const useStore = () => ({
 		state.hasLoaded = true
 	},
 
-	editCocktail: (cocktail) => {
-		console.log(cocktail);
+	editCocktail: async (id, attributes) => {
+		const data = JSON.stringify({ data: { type: 'cocktails', id, attributes } })
+		const response = await axios.patch(`/cocktails/${id}`, data)
 
-		// const data = JSON.stringify({ data: { type: 'cocktails', id: this.id, attributes: this.cocktail } })
-		// this.$http
-		// 	// .patch('/cocktails/', data)
-		// 	.patch(`/cocktails/${this.id}`, data)
-		// 	.then(() => {
-		// 		this.$router.push({ name: 'home' })
-		// 	})
-		// 	.catch(() => {
-		// 	})
+		const index = state.cocktails.findIndex(item => item.id === +id) // im Fehlerfall `-1`
+		if (index !== -1) {
+			// Object.assign(state.cocktails[index], attributes)
+			state.cocktails[index] = new JsonApiResponseConverter(response.data).formattedResponse
+		}
 	},
 
 	addCocktail: (cocktail) => {
@@ -105,7 +102,7 @@ export const useStore = () => ({
 	autoLogin() {
 		// const token = localStorage.getItem('token');
 		// if (!token) {
-		// 	return;
+		// 	return
 		// }
 		const user = localStorage.getItem('user')
 			? JSON.parse(localStorage.getItem('user'))
@@ -120,9 +117,9 @@ export const useStore = () => ({
 		// 	return false
 		// }
 
-		// const userId = localStorage.getItem('userId');
+		// const userId = localStorage.getItem('userId')
 		// if (userId) {
-		// 	console.info('autoLogin');
+		// 	console.info('autoLogin')
 		// 	commit('authUser', { token, userId })
 		// }
 		_saveUserData({ username: user.username ?? '', token: user.token })

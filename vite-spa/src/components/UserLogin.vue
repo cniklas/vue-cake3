@@ -34,26 +34,30 @@ const password = ref('')
 // const status = ref(null)
 const errorCode = ref(null)
 const errorMessage = ref('')
+const isFormLocked = ref(false)
 
 const onSubmit = async () => {
-	// status.value = null
-	// errorCode.value = null
+	if (!isFormLocked.value) {
+		isFormLocked.value = true
+		// status.value = null
+		// errorCode.value = null
 
-	try {
-		await login({
-			username: username.value,
-			password: password.value
-		})
-		router.push({ name: 'cocktails' })
-	}
-	catch (error) {
-		/**
-		 * error.message `Network Error`, wenn Server nicht erreichbar
-		 */
-		// console.table(error.response)
-		// status.value = error.response.status
-		errorCode.value = error.response.status
-		errorMessage.value = error.response.data?.data?.message ?? ''
+		try {
+			await login({
+				username: username.value,
+				password: password.value
+			})
+			router.push({ name: 'cocktails' })
+		}
+		catch (error) {
+			/**
+			 * error.message `Network Error`, wenn Server nicht erreichbar
+			 */
+			// console.table(error.response)
+			// status.value = error.response.status
+			errorCode.value = error.response.status
+			errorMessage.value = error.response.data?.data?.message ?? ''
+		}
 	}
 }
 </script>
