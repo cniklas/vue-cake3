@@ -14,7 +14,7 @@
 				</dl>
 			</router-link>
 
-			<button type="button" @click.stop="deleteItem(item.id)">löschen</button>
+			<button type="button" @click.stop="onDelete(item.id)">löschen</button>
 		</div>
 	</main>
 
@@ -35,21 +35,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from '../store'
 
-const { cocktails, recordCount, hasLoaded, fetchCocktails } = useStore()
+const { cocktails, recordCount, hasLoaded, fetchCocktails, deleteCocktail } = useStore()
 const errorCode = ref(null)
 const errorMessage = ref('')
 
-// 	methods: {
-// 		deleteItem(id) {
-// 			this.$http.delete(`/cocktails/${id}`)
-// 				.then(() => {
-// 					const item = this.cocktails.find(item => item.id === id);
-// 					this.cocktails.splice(this.cocktails.indexOf(item), 1);
-// 				})
-// 				.catch(() => {
-// 				})
-// 		}
-// 	},
 const getCocktails = async () => {
 	errorCode.value = null
 
@@ -70,37 +59,15 @@ const getCocktails = async () => {
 }
 const remaining = computed(() => recordCount.value ? recordCount.value - cocktails.value.length : 0 )
 
-// 	mounted () {
-// 		this.$http.get('/cocktails')
-// 			.then(({data}) => {
-// 				this.cocktails = data.data
-// 				this.cocktails.map((item, index) => item.odd = !(index % 2))
-// 				this.count = data.meta.record_count
-// 			})
-// 			.catch((error) => {
-// 				if (error.response && error.response.data && error.response.data.errors && error.response.data.errors.length) {
-// 					this.errorMessage = error.response.data.errors[0].detail
-// 				}
-// 			})
+const onDelete = async id => {
+	try {
+		await deleteCocktail(id)
+	}
+	catch (error) {
+		console.table(error.response)
+	}
+}
 
-// 		// this.$http.get('/cocktails/3')
-// 		// 	.then(({data}) => {
-// 		// 		this.cocktail = data.data
-// 		// 	})
-// 		// 	.catch((/* error */) => {
-// 		// 		// console.error(error)
-// 		// 	})
-
-// 		// this.$store.dispatch('jv/get', 'cocktails')
-// 		// 	.then((data) => {
-// 		// 		console.log(data)
-// 		// 		this.count = data._jv.json.meta.record_count
-// 		// 	})
-// 		// 	.catch(error => {
-// 		// 		console.error(error)
-// 		// 	})
-// 	}
-// }
 onMounted(() => {
 	getCocktails()
 })

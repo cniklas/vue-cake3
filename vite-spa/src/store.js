@@ -66,8 +66,11 @@ export const useStore = () => ({
 		state.recordCount += 1
 	},
 
-	deleteCocktail: (cocktail) => {
-		state.cocktails = state.cocktails.filter((c) => c.id !== cocktail.id)
+	deleteCocktail: async (id) => {
+		await axios.delete(`/cocktails/${id}`)
+
+		state.cocktails = state.cocktails.filter(c => c.id !== id)
+		state.recordCount -= 1
 	},
 
 	user: computed(() => state.user),
