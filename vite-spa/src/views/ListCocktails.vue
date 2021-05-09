@@ -1,7 +1,7 @@
 <template>
 	<h1>Cocktails</h1>
 
-	<div v-if="hasLoaded" class="cocktails">
+	<main v-if="hasLoaded" class="cocktails">
 		<div class="cocktail" v-for="item in cocktails" :key="item.id">
 			<router-link :to="{ name: 'edit-cocktail', params: { id: item.id } }" custom v-slot="{ navigate }">
 				<dl @click="navigate" class="inline-list is-link">
@@ -16,7 +16,7 @@
 
 			<button type="button" @click.stop="deleteItem(item.id)">löschen</button>
 		</div>
-	</div>
+	</main>
 
 	<p v-else :class="{'error-message': errorCode }">
 		{{ errorCode && errorMessage ? `${errorCode}: ${errorMessage}` : 'Cocktails werden geladen …' }}
@@ -25,6 +25,10 @@
 	<p v-if="remaining > 0">
 		<strong>… und {{ remaining }} weitere …</strong>
 	</p>
+
+	<div v-if="hasLoaded">
+		<router-link :to="{ name: 'add-cocktail' }" class="button">Add a cocktail</router-link>
+	</div>
 </template>
 
 <script setup>
@@ -109,6 +113,7 @@ onMounted(() => {
 	flex-wrap: wrap;
 	justify-content: center;
 	text-align: left;
+	margin-bottom: 1rem;
 }
 
 .cocktail {
@@ -142,44 +147,44 @@ onMounted(() => {
 	&:only-child {
 		background-color: hsl(8, 60%, 80%);
 	}
-}
 
-.inline-list {
-	margin: 0 0 1rem;
+	.inline-list {
+		margin: 0 0 1rem;
 
-	dt, dd {
-		display: inline;
+		dt, dd {
+			display: inline;
+			margin: 0;
+		}
+
+		dt {
+			font-weight: 700;
+
+			&::after {
+				content: ':';
+			}
+		}
+
+		dd {
+			&::before {
+				content: '\0020';
+			}
+
+			&::after {
+				content: '\a';
+				white-space: pre;
+			}
+		}
+	}
+
+	.is-link {
+		cursor: pointer;
+	}
+
+	button,
+	.button {
+		background: none #fff;
+		color: inherit;
 		margin: 0;
 	}
-
-	dt {
-		font-weight: 700;
-
-		&::after {
-			content: ':';
-		}
-	}
-
-	dd {
-		&::before {
-			content: '\0020';
-		}
-
-		&::after {
-			content: '\a';
-			white-space: pre;
-		}
-	}
-}
-
-.is-link {
-	cursor: pointer;
-}
-
-button,
-.button {
-	background: none #fff;
-	color: inherit;
-	margin: 0;
 }
 </style>

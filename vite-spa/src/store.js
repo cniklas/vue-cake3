@@ -51,15 +51,19 @@ export const useStore = () => ({
 		}
 	},
 
-	addCocktail: (cocktail) => {
+	addCocktail: async (attributes) => {
+		const data = JSON.stringify({ data: { type: 'cocktails', attributes } })
+		const response = await axios.post('/cocktails', data)
+
 		/**
 		 * We’re changing the cocktails array in an immutable way, always attributing to it a new array instead of changing the current value.
 		 * That’s a safer and always recommended way to work with arrays and objects to ensure reactivity works.
 		 */
 		state.cocktails = [
-			...state.cocktails,
-			cocktail,
+			new JsonApiResponseConverter(response.data).formattedResponse,
+			...state.cocktails
 		]
+		state.recordCount += 1
 	},
 
 	deleteCocktail: (cocktail) => {

@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 const Authenticate = () => import('./views/Authenticate.vue')
 const Cocktails = () => import('./views/Cocktails.vue')
 const ListCocktails = () => import('./views/ListCocktails.vue')
+const AddCocktail = () => import('./views/AddCocktail.vue')
 const EditCocktail = () => import('./views/EditCocktail.vue')
 
 const { user } = useStore()
@@ -18,6 +19,7 @@ const routes = [
 	{ path: '/cocktails', component: Cocktails,
 		children: [
 			{ path: '', name: 'cocktails', component: ListCocktails },
+			{ path: 'add', name: 'add-cocktail', component: AddCocktail },
 			{ path: ':id', name: 'edit-cocktail', component: EditCocktail, props: true }
 		]
 	},

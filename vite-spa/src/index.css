@@ -46,7 +46,7 @@ table {
 	max-width: 90vw;
 } */
 
-a:visited {
+:any-link {
 	color: inherit;
 }
 
@@ -55,12 +55,14 @@ button {
 	height: 2em;
 	padding: 0.25em 1.275em;
 	margin: 0.5em;
+	display: inline-block;
 	border-radius: 5px;
 	background: linear-gradient(to right, #16c0b0, #84cf6a);
 	font-family: inherit;
 	font-size: inherit;
 	font-size: 1em;
 	color: #fff;
+	text-decoration: none;
 	cursor: pointer;
 	border: none;
 	outline: none;
