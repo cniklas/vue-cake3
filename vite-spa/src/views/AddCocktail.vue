@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, toRaw, reactive, computed, /* watch, */ onMounted } from 'vue'
+import { ref, toRaw, reactive, computed, /* watch, */ onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '../store'
 
@@ -54,7 +54,7 @@ const onSubmit = async () => {
 	}
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	if (!hasLoaded.value) {
 		// go to /cocktails first to fetch cocktails from database
 		router.push({ name: 'cocktails' })

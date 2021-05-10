@@ -107,10 +107,6 @@ export const useStore = () => ({
 	},
 
 	autoLogin() {
-		// const token = localStorage.getItem('token');
-		// if (!token) {
-		// 	return
-		// }
 		const user = localStorage.getItem('user')
 			? JSON.parse(localStorage.getItem('user'))
 			: {}
@@ -124,11 +120,6 @@ export const useStore = () => ({
 		// 	return false
 		// }
 
-		// const userId = localStorage.getItem('userId')
-		// if (userId) {
-		// 	console.info('autoLogin')
-		// 	commit('authUser', { token, userId })
-		// }
 		_saveUserData({ username: user.username ?? '', token: user.token })
 	},
 

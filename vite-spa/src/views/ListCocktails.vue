@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { useStore } from '../store'
 
 const { cocktails, recordCount, hasLoaded, fetchCocktails, deleteCocktail } = useStore()
@@ -68,7 +68,7 @@ const onDelete = async id => {
 	}
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	getCocktails()
 })
 </script>

@@ -25,26 +25,6 @@ pre {
 	color: #2c3e50;
 	margin-top: 60px;
 }
-/*
-nav ul {
-	padding: 0;
-	list-style: none;
-}
-
-.router-link-active {
-	font-weight: 500;
-} */
-/*
-section {
-	margin: 1em auto;
-}
-
-table {
-	border-collapse: collapse;
-	margin: 1em auto;
-	width: 600px;
-	max-width: 90vw;
-} */
 
 :any-link {
 	color: inherit;

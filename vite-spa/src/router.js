@@ -14,8 +14,6 @@ const history = createWebHistory()
 const routes = [
 	{ path: '/', name: 'home', component: Home },
 	{ path: '/authenticate', component: Authenticate },
-	// { path: '/cocktails', name: 'cocktails', component: Cocktails },
-	// { path: '/:id', name: 'edit-cocktail', component: EditCocktail, props: true },
 	{ path: '/cocktails', component: Cocktails,
 		children: [
 			{ path: '', name: 'cocktails', component: ListCocktails },

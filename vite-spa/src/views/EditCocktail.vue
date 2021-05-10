@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, toRefs, toRaw, reactive, computed, onMounted } from 'vue'
+import { defineProps, ref, toRefs, toRaw, reactive, computed, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '../store'
 
@@ -69,7 +69,7 @@ const onSubmit = async () => {
 	}
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	getCocktail()
 })
 </script>
