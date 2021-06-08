@@ -53,7 +53,6 @@ const onSubmit = async () => {
 			/**
 			 * error.message `Network Error`, wenn Server nicht erreichbar
 			 */
-			// console.table(error.response)
 			// status.value = error.response.status
 			errorCode.value = error.response.status
 			errorMessage.value = error.response.data?.data?.message ?? ''

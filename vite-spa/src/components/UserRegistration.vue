@@ -58,7 +58,6 @@ const onSubmit = async () => {
 			router.push({ name: 'cocktails' })
 		}
 		catch (error) {
-			// console.table(error.response)
 			// status.value = error.response.status
 			errorCode.value = error.response.status
 			errorMessage.value = error.response.data?.data?.message ?? ''

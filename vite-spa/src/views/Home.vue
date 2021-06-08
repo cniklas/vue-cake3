@@ -12,9 +12,5 @@
 <script setup>
 import { useStore } from '../store'
 
-const { user, toggleIsNewUser } = useStore()
-
-const setIsNewUser = (flag) => {
-	toggleIsNewUser(flag)
-}
+const { user, setIsNewUser } = useStore()
 </script>

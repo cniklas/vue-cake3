@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { useStore } from './store'
 import Home from './views/Home.vue'
-// import Authenticate from './views/Authenticate.vue'
 const Authenticate = () => import('./views/Authenticate.vue')
 const Cocktails = () => import('./views/Cocktails.vue')
 const ListCocktails = () => import('./views/ListCocktails.vue')

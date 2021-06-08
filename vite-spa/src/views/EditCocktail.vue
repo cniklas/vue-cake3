@@ -57,8 +57,7 @@ const onSubmit = async () => {
 	if (!isFormLocked.value) {
 		isFormLocked.value = true
 
-		// submit.value.setAttribute('disabled', 'disabled')
-		// @todo bei SUCCESS Formular mit bounce back nach oben(?) rausfahren
+		// TODO bei SUCCESS Formular mit bounce back nach oben(?) rausfahren
 		try {
 			await editCocktail(id.value, { ...toRaw(form) })
 			router.push({ name: 'cocktails' })

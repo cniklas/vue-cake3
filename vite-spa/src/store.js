@@ -16,7 +16,6 @@ const _saveUserData = (userData) => {
 
 	axios.defaults.baseURL = 'https://localhost.test/vue-cake3/api'
 	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
-	// axios.defaults.headers.common['Authorization'] = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTU5NTg3NDU4OH0.e8MfoPPAU7pbqr34N7frBG_pbKCi3Ah6Pc0SHfquWQU'
 	axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
 
 	axios.defaults.headers.post['Content-Type'] = 'application/vnd.api+json'
@@ -26,7 +25,6 @@ const _saveUserData = (userData) => {
 }
 
 export const useStore = () => ({
-	// We’re using the computed method inside the useStore function so that our state not be updated from outside
 	cocktails: computed(() => state.cocktails),
 	recordCount: computed(() => state.recordCount),
 	hasLoaded: computed(() => state.hasLoaded),
@@ -44,9 +42,8 @@ export const useStore = () => ({
 		const data = JSON.stringify({ data: { type: 'cocktails', id, attributes } })
 		const response = await axios.patch(`/cocktails/${id}`, data)
 
-		const index = state.cocktails.findIndex(item => item.id === +id) // im Fehlerfall `-1`
+		const index = state.cocktails.findIndex(item => item.id === +id)
 		if (index !== -1) {
-			// Object.assign(state.cocktails[index], attributes)
 			state.cocktails[index] = new JsonApiResponseConverter(response.data).formattedResponse
 		}
 	},
@@ -76,7 +73,7 @@ export const useStore = () => ({
 	user: computed(() => state.user),
 	isNewUser: computed(() => state.isNewUser),
 
-	toggleIsNewUser: (val) => {
+	setIsNewUser: (val) => {
 		state.isNewUser = !!val
 	},
 

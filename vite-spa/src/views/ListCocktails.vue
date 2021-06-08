@@ -47,7 +47,6 @@ const getCocktails = async () => {
 			await fetchCocktails()
 		}
 		catch (error) {
-			// console.table(error.response)
 			errorCode.value = error.response.status
 			errorMessage.value = error.response.statusText ?? ''
 
@@ -84,7 +83,6 @@ onBeforeMount(() => {
 }
 
 .cocktail {
-	// background-color: hsl(153, 37%, 71%);
 	background: conic-gradient(from -120deg at center 80%, #16c0b0, #84cf6a, #16c0b0);
 	color: #0d0d0d;
 	flex: 0 1 220px;
@@ -97,7 +95,6 @@ onBeforeMount(() => {
 	justify-content: space-between;
 
 	&:nth-child(odd) {
-		// background-color: hsl(153, 60%, 80%)
 		position: relative;
 		mix-blend-mode: lighten;
 

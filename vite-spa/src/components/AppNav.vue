@@ -15,14 +15,7 @@
 </template>
 
 <script setup>
-// import { computed } from 'vue'
-// import { useRouter } from 'vue-router'
 import { useStore } from '../store'
-
-// const router = useRouter()
-// // the activeRoute value is created as computed so that it’s automatically updated whenever the router object changes
-// const activeRoute = computed(() => router.currentRoute.value.path)
-// const isActive = path => path === activeRoute.value
 
 const { user, logout } = useStore()
 </script>
@@ -49,7 +42,6 @@ a {
 	border-bottom: 2px solid transparent;
 }
 
-// .router-link-exact-active {
 .router-link-active {
 	color: #fff;
 	border-bottom-color: currentColor;
