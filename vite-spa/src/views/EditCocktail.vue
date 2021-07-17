@@ -49,6 +49,7 @@ const getCocktail = () => {
 	}
 	else {
 		// go to /cocktails first to fetch cocktails from database
+		// TODO Cocktails laden, Cocktail anzeigen und nur weiterleiten auf /cocktails, wenn kein Match
 		router.push({ name: 'cocktails' })
 	}
 }

@@ -9,7 +9,7 @@ const EditCocktail = () => import('./views/EditCocktail.vue')
 
 const { user } = useStore()
 
-const history = createWebHistory()
+const history = createWebHistory('/cocktails/')
 const routes = [
 	{ path: '/', name: 'home', component: Home },
 	{ path: '/authenticate', component: Authenticate },

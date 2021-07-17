@@ -123,4 +123,14 @@ z.B. `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTU5NTg3ND
 ## Teil 6. Frontend einrichten
 
 Im Tutorial wird Ember verwendet.  
-Vuex-Modul: https://github.com/mrichar1/jsonapi-vuex
+Vuex-Modul für Vue 2: https://github.com/mrichar1/jsonapi-vuex
+
+Beachte [Best practice to integrate VueJS with CakePHP 3](https://stackoverflow.com/a/51098921)
+
+### Build-Anpassung
+
+https://vitejs.dev/guide/build.html#public-base-path
+
+```json
+"build": "vite build --base=https://myplanner.de/cocktails/"
+```

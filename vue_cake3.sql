@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 27. Jul 2020 um 11:16
--- Server-Version: 10.4.13-MariaDB
--- PHP-Version: 7.4.8
+-- Erstellungszeit: 17. Jul 2021 um 09:39
+-- Server-Version: 10.4.18-MariaDB
+-- PHP-Version: 7.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 -- Tabellenstruktur für Tabelle `cocktails`
 --
 
-DROP TABLE IF EXISTS `cocktails`;
 CREATE TABLE `cocktails` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -62,7 +61,8 @@ INSERT INTO `cocktails` (`id`, `name`, `description`, `created`, `modified`) VAL
 (19, 'Matador', 'Tequila based', '2015-04-11 09:52:03', NULL),
 (20, 'B52', 'Cream based', '2015-04-11 09:52:03', NULL),
 (21, 'Beach Runner', 'Gin based', '2015-04-11 09:52:03', NULL),
-(22, 'Allgäu-Cocktail', 'Rum based', '2019-08-26 20:23:56', '2020-07-27 11:15:57');
+(22, 'Allgäu-Cocktail', 'Rum based', '2019-08-26 20:23:56', '2020-07-27 11:15:57'),
+(23, 'Etna', 'Ramazotti based', '2021-05-09 20:17:00', '2021-05-09 20:17:00');
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,6 @@ INSERT INTO `cocktails` (`id`, `name`, `description`, `created`, `modified`) VAL
 -- Tabellenstruktur für Tabelle `phinxlog`
 --
 
-DROP TABLE IF EXISTS `phinxlog`;
 CREATE TABLE `phinxlog` (
   `version` bigint(20) NOT NULL,
   `migration_name` varchar(100) DEFAULT NULL,
@@ -93,7 +92,6 @@ INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `
 -- Tabellenstruktur für Tabelle `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -141,7 +139,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `cocktails`
 --
 ALTER TABLE `cocktails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
