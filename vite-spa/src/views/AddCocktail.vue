@@ -1,7 +1,7 @@
 <template>
 	<h1>{{ form.name || 'Create a new cocktail' }}</h1>
 
-	<form v-if="form" @submit.prevent="onSubmit" novalidate>
+	<form v-if="hasLoaded" @submit.prevent="onSubmit" novalidate>
 		<div class="input-group">
 			<label for="name">Name:</label>
 			<input v-model.trim="form.name" type="text" id="name" required>
@@ -27,10 +27,10 @@ const form = reactive({
 	name: '',
 	description: ''
 })
-const submit = ref(null) // template ref
+const submit = ref(null)
 // const startValidation = ref(false)
 const isInputEmpty = computed(() => /* startValidation.value && */ Object.values(form).some(entry => entry === ''))
-const isFormLocked = ref(false)
+const isSubmitLocked = ref(false)
 
 const { hasLoaded, addCocktail } = useStore()
 
@@ -39,8 +39,8 @@ const { hasLoaded, addCocktail } = useStore()
 // })
 
 const onSubmit = async () => {
-	if (!isFormLocked.value) {
-		isFormLocked.value = true
+	if (!isSubmitLocked.value) {
+		isSubmitLocked.value = true
 
 		// TODO bei SUCCESS Formular mit bounce back nach oben(?) rausfahren
 		try {

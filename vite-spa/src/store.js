@@ -10,18 +10,21 @@ const state = reactive({
 	isNewUser: false
 })
 
+axios.defaults.baseURL = import.meta.env.DEV ? 'https://localhost.test/vue-cake3/api' : 'https://myplanner/cocktails-ep/api'
+
 const _saveUserData = (userData) => {
 	localStorage.setItem('user', JSON.stringify(userData))
 	state.user = userData
 
-	axios.defaults.baseURL = 'https://localhost.test/vue-cake3/api'
 	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
 	axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
 
 	axios.defaults.headers.post['Content-Type'] = 'application/vnd.api+json'
 	axios.defaults.headers.patch['Content-Type'] = 'application/vnd.api+json'
 	// https://stackoverflow.com/a/51098921
-	axios.defaults.headers.delete['Access-Control-Allow-Origin'] = 'https://localhost.test'
+	if (import.meta.env.DEV) {
+		axios.defaults.headers.delete['Access-Control-Allow-Origin'] = 'https://localhost.test'
+	}
 }
 
 export const useStore = () => ({
@@ -78,7 +81,7 @@ export const useStore = () => ({
 	},
 
 	register: async (credentials) => {
-		const response = await axios.post('https://localhost.test/vue-cake3/api/users/register', { ...credentials, active: true }, {
+		const response = await axios.post('/users/register', { ...credentials, active: true }, {
 			headers: {
 				'accept': 'application/json',
 				'content-type': 'application/json'
@@ -91,7 +94,7 @@ export const useStore = () => ({
 	},
 
 	login: async (credentials) => {
-		const response = await axios.post('https://localhost.test/vue-cake3/api/users/token', credentials, {
+		const response = await axios.post('/users/token', credentials, {
 			headers: {
 				'accept': 'application/json',
 				'content-type': 'application/json'

@@ -132,5 +132,5 @@ Beachte [Best practice to integrate VueJS with CakePHP 3](https://stackoverflow.
 https://vitejs.dev/guide/build.html#public-base-path
 
 ```json
-"build": "vite build --base=https://myplanner.de/cocktails/"
+"build": "vite build --base=https://example.com/dist/"
 ```

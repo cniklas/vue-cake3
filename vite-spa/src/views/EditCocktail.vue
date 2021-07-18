@@ -1,7 +1,7 @@
 <template>
 	<h1>Cocktail {{ `#${id}` }}</h1>
 
-	<form v-if="form" @submit.prevent="onSubmit" novalidate>
+	<form v-if="cocktailFound" @submit.prevent="onSubmit" novalidate>
 		<div class="input-group">
 			<label for="name">Name:</label>
 			<input v-model.trim="form.name" type="text" id="name" required>
@@ -14,6 +14,10 @@
 
 		<button ref="submit" type="submit" :disabled="isInputEmpty">Speichern</button>
 	</form>
+
+	<p v-else>
+		Cocktails werden geladen …
+	</p>
 </template>
 
 <script setup>
@@ -28,16 +32,17 @@ const { id } = toRefs(props)
 
 const router = useRouter()
 
+const cocktailFound = ref(false)
 const form = reactive({
 	name: '',
 	description: ''
 })
-const submit = ref(null) // template ref
+const submit = ref(null)
 const isInputEmpty = computed(() => Object.values(form).some(entry => entry === ''))
-const isFormLocked = ref(false)
+const isSubmitLocked = ref(false)
 
-const { cocktails, hasLoaded, editCocktail } = useStore()
-const getCocktail = () => {
+const { cocktails, hasLoaded, fetchCocktails, editCocktail } = useStore()
+const getCocktail = async () => {
 	if (hasLoaded.value) {
 		// prop `id`: String
 		// item.id: Number
@@ -45,18 +50,30 @@ const getCocktail = () => {
 		if (cocktail !== undefined) {
 			form.name = cocktail.name
 			form.description = cocktail.description
+
+			cocktailFound.value = true
+		}
+		else {
+			// TODO error handling
+			return router.push({ name: 'cocktails' })
 		}
 	}
+
 	else {
-		// go to /cocktails first to fetch cocktails from database
-		// TODO Cocktails laden, Cocktail anzeigen und nur weiterleiten auf /cocktails, wenn kein Match
-		router.push({ name: 'cocktails' })
+		try {
+			await fetchCocktails()
+			getCocktail()
+		}
+		catch (error) {
+			// TODO error handling
+			return router.push({ name: 'cocktails' })
+		}
 	}
 }
 
 const onSubmit = async () => {
-	if (!isFormLocked.value) {
-		isFormLocked.value = true
+	if (!isSubmitLocked.value) {
+		isSubmitLocked.value = true
 
 		// TODO bei SUCCESS Formular mit bounce back nach oben(?) rausfahren
 		try {

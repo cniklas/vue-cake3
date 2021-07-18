@@ -47,10 +47,10 @@ const getCocktails = async () => {
 			await fetchCocktails()
 		}
 		catch (error) {
-			errorCode.value = error.response.status
-			errorMessage.value = error.response.statusText ?? ''
+			errorCode.value = error.response?.status
+			errorMessage.value = error.response?.statusText ?? ''
 
-			if (error.response.data?.errors?.length) {
+			if (error.response?.data?.errors?.length) {
 				errorMessage.value = error.response.data.errors[0].detail ?? errorMessage.value
 			}
 		}
@@ -59,11 +59,13 @@ const getCocktails = async () => {
 const remaining = computed(() => recordCount.value ? recordCount.value - cocktails.value.length : 0 )
 
 const onDelete = async id => {
-	try {
-		await deleteCocktail(id)
-	}
-	catch (error) {
-		console.table(error.response)
+	if (confirm('Bist du sicher?')) {
+		try {
+			await deleteCocktail(id)
+		}
+		catch (error) {
+			console.table(error.response)
+		}
 	}
 }
 
