@@ -10,7 +10,7 @@ const state = reactive({
 	isNewUser: false
 })
 
-axios.defaults.baseURL = import.meta.env.DEV ? 'https://localhost.test/vue-cake3/api' : 'https://myplanner/cocktails-ep/api'
+axios.defaults.baseURL = import.meta.env.DEV ? 'https://localhost.test/vue-cake3/api' : 'https://myplanner.de/cocktails-ep/api'
 
 const _saveUserData = (userData) => {
 	localStorage.setItem('user', JSON.stringify(userData))
