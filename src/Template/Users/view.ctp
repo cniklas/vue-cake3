@@ -17,8 +17,8 @@
     <h3><?= h($user->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Username') ?></th>
-            <td><?= h($user->username) ?></td>
+            <th scope="row"><?= __('Email') ?></th>
+            <td><?= h($user->email) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Password') ?></th>
@@ -37,8 +37,8 @@
             <td><?= h($user->modified) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Active') ?></th>
-            <td><?= $user->active ? __('Yes') : __('No'); ?></td>
+            <th scope="row"><?= __('Enabled') ?></th>
+            <td><?= $user->enabled ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
 </div>

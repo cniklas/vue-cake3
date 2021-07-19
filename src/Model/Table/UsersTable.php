@@ -52,20 +52,20 @@ class UsersTable extends Table
 			->allowEmptyString('id', null, 'create');
 
 		$validator
-			->scalar('username')
-			->maxLength('username', 50)
-			->requirePresence('username', 'create')
-			->notEmptyString('username');
+			->scalar('email')
+			->maxLength('email', 64)
+			->requirePresence('email', 'create')
+			->notEmptyString('email');
 
 		$validator
 			->scalar('password')
-			->maxLength('password', 255)
+			->maxLength('password', 64)
 			->requirePresence('password', 'create')
 			->notEmptyString('password');
 
 		$validator
-			->boolean('active')
-			->allowEmptyString('active');
+			->boolean('enabled')
+			->allowEmptyString('enabled');
 
 		return $validator;
 	}
@@ -79,7 +79,7 @@ class UsersTable extends Table
 	 */
 	public function buildRules(RulesChecker $rules)
 	{
-		$rules->add($rules->isUnique(['username']));
+		$rules->add($rules->isUnique(['email']));
 
 		return $rules;
 	}

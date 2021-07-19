@@ -59,13 +59,14 @@ class AppController extends Controller
 			'authenticate' => [
 				// FormAuthenticate MUST be included here or AuthComponent will not be able to validate the posted (non-JWT) JSON credentials during the /token action
 				'Form' => [
-					'scope' => ['Users.active' => 1]
+					'scope' => ['Users.enabled' => 1],
+					'fields' => ['username' => 'email', 'password' => 'password']
 				],
 
 				'ADmad/JwtAuth.Jwt' => [
 					'parameter' => 'token',
 					'userModel' => 'Users',
-					'scope' => ['Users.active' => 1],
+					'scope' => ['Users.enabled' => 1],
 					'fields' => [
 						'username' => 'id'
 					],

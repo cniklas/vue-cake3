@@ -42,7 +42,7 @@ const onSubmit = async () => {
 
 		try {
 			await login({
-				username: username.value,
+				email: username.value,
 				password: password.value
 			})
 			router.push({ name: 'cocktails' })

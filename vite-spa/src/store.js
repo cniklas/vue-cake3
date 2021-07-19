@@ -102,7 +102,7 @@ export const useStore = () => ({
 		})
 
 		if (response.data?.data?.token) {
-			_saveUserData({ username: credentials.username, token: response.data.data.token })
+			_saveUserData({ username: credentials.email, token: response.data.data.token })
 		}
 	},
 
