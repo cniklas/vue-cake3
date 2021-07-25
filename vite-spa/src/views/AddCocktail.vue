@@ -44,7 +44,7 @@ const onSubmit = async () => {
 
 		// TODO bei SUCCESS Formular mit bounce back nach oben(?) rausfahren
 		try {
-			await addCocktail({ ...toRaw(form) })
+			await addCocktail(toRaw(form))
 			router.push({ name: 'cocktails' })
 		}
 		catch (error) {
