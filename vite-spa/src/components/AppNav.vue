@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useStore } from '../store'
+import { useStore } from '../useStore'
 
 const { user, logout } = useStore()
 </script>

@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import { useStore } from './store'
+import { useStore } from './useStore'
 import Home from './views/Home.vue'
 const Authenticate = () => import('./views/Authenticate.vue')
 const Cocktails = () => import('./views/Cocktails.vue')

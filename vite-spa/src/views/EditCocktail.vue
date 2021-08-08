@@ -23,7 +23,7 @@
 <script setup>
 import { defineProps, ref, toRefs, toRaw, reactive, computed, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStore } from '../store'
+import { useStore } from '../useStore'
 
 const props = defineProps({
 	id: String

@@ -14,7 +14,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useStore } from '../store'
+import { useStore } from '../useStore'
 import UserRegistration from '../components/UserRegistration.vue'
 import UserLogin from '../components/UserLogin.vue'
 
