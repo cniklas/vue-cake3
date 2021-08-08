@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue'
-import { useStore } from '../store'
+import { useStore } from '../useStore'
 
 const { cocktails, recordCount, hasLoaded, fetchCocktails, deleteCocktail } = useStore()
 const errorCode = ref(null)
@@ -129,7 +129,7 @@ onBeforeMount(() => {
 
 			&::after {
 				content: '\a';
-				white-space: pre;
+				white-space: pre-line;
 			}
 		}
 	}

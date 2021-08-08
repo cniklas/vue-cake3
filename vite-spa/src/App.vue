@@ -6,7 +6,7 @@
 
 <script setup>
 import { onBeforeMount } from 'vue'
-import { useStore } from './store'
+import { useStore } from './useStore'
 import AppNav from './components/AppNav.vue'
 
 const { autoLogin } = useStore()

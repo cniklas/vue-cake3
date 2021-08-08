@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useStore } from '../store'
+import { useStore } from '../useStore'
 
 const { user, logout } = useStore()
 </script>
@@ -33,6 +33,7 @@ nav {
 	margin-left: auto;
 	margin-right: 1rem;
 	color: #fff;
+	display: none;
 }
 
 a {
@@ -63,7 +64,13 @@ button,
 	}
 }
 
-.nav-welcome + button {
-	margin-left: 0;
+@media (min-width: 540px) {
+	.nav-welcome {
+		display: revert;
+	}
+
+	.nav-welcome + button {
+		margin-left: 0;
+	}
 }
 </style>

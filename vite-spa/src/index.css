@@ -13,16 +13,13 @@ html, body {
 	padding: 0;
 }
 
-pre {
-	text-align: left;
-}
-
 #app {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
+	padding-bottom: 3rem;
 }
 
 :any-link {
@@ -38,7 +35,6 @@ button {
 	border-radius: 5px;
 	background: linear-gradient(to right, #16c0b0, #84cf6a);
 	font-family: inherit;
-	font-size: inherit;
 	font-size: 1em;
 	color: #fff;
 	text-decoration: none;
