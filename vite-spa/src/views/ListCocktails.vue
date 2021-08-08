@@ -97,22 +97,14 @@ onBeforeMount(() => {
 	justify-content: space-between;
 
 	&:nth-child(odd) {
-		position: relative;
-		mix-blend-mode: lighten;
-
-		&::after {
-			content: '';
-			position: absolute;
-			inset: 0;
-			z-index: -1;
-			border-radius: inherit;
-			background: linear-gradient(30deg, hsl(174deg 79% 42%), transparent);
-		}
+		background:
+			linear-gradient(30deg, hsl(174deg 79% 42%), transparent),
+			conic-gradient(from -120deg at center 80%, #16c0b0, #84cf6a, #16c0b0);
 	}
 
-	&:only-child {
-		background-color: hsl(8, 60%, 80%);
-	}
+	// &:only-child {
+	// 	background: hsl(8, 60%, 80%);
+	// }
 
 	.inline-list {
 		margin: 0 0 1rem;
