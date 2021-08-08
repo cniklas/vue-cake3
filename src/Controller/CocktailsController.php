@@ -12,10 +12,9 @@ class CocktailsController extends AppController
 		// 'fields' => [
 		// 	'id', 'name', 'description'
 		// ],
-		'sortWhitelist' => [
-			'id', 'name'/*, 'description'*/
-		],
-
+		// 'sortWhitelist' => [
+		// 	'id', 'name',
+		// ],
 		'sort' => 'id',
 		'direction' => 'desc',
 	];

@@ -8,11 +8,13 @@ class CocktailsController extends AppController
 	public $paginate = [
 		'page' => 1, // Do NOT change the default `page` used for the index resultset to prevent frustrating further tests
 		'limit' => 10,
-		'maxLimit' => 15,
+		'maxLimit' => 100,
+		// 'fields' => [
+		// 	'id', 'name', 'description'
+		// ],
 		'sortWhitelist' => [
 			'id', 'name',
 		],
-
 		'sort' => 'id',
 		'direction' => 'desc',
 	];
