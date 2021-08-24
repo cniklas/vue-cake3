@@ -6,24 +6,27 @@
 
 <script setup>
 import { onBeforeMount } from 'vue'
+import axios from 'axios'
 import { useStore } from './useStore'
 import AppNav from './components/AppNav.vue'
 
-const { autoLogin } = useStore()
+const { autoLogin, logout } = useStore()
+
 onBeforeMount(() => {
 	autoLogin()
 
-	// axios.interceptors.response.use(
-	// 	response => response,
-	// 	error => {
-	// 		console.log(error.response)
-	// 		if (error.response.status === 401) {
-	// 			this.$router.push('/')
-	// 			this.$store.dispatch('logout')
-	// 		}
-	// 		return Promise.reject(error)
-	// 	}
-	// )
+	axios.interceptors.response.use(
+		response => response,
+		error => {
+			// console.log(error.response)
+			// Unauthorized || Expired token
+			if (error.response?.data?.errors[0]?.status === 401 || error.response?.data?.errors[0]?.detail === 'Expired token') {
+				// router.push('/')
+				logout()
+			}
+			return Promise.reject(error)
+		}
+	)
 })
 </script>
 
