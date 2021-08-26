@@ -57,7 +57,7 @@ class AppController extends Controller
 			// we use Memory based non-persistent storage for the authenticated user (instead of Cake’s session based default)
 			'storage' => 'Memory',
 			'authenticate' => [
-				// FormAuthenticate MUST be included here or AuthComponent will not be able to validate the posted (non-JWT) JSON credentials during the /token action
+				// FormAuthenticate MUST be included here or AuthComponent will not be able to validate the posted (non-JWT) JSON credentials during the `/token` action
 				'Form' => [
 					'scope' => ['Users.active' => 1]
 				],
@@ -67,15 +67,16 @@ class AppController extends Controller
 					'userModel' => 'Users',
 					'scope' => ['Users.active' => 1],
 					'fields' => [
+						// `username` denotes the identifier field for fetching user record. The `sub` claim of JWT must contain identifier value
 						'username' => 'id'
 					],
-					// by enabling queryDataSource the sub field in the JWT token will be used to query the database for user information (using the User model)
+					// by enabling `queryDataSource` the `sub` field in the JWT token will be used to query the database for user information (using the User model)
 					'queryDatasource' => true
 				]
 
 			],
 			'unauthorizedRedirect' => false,
-			// checkAuthIn makes user information available in all Controller beforeFilter() functions
+			// `checkAuthIn` makes user information available in all Controller beforeFilter() functions
 			'checkAuthIn' => 'Controller.initialize'
 		]);
 	}

@@ -88,6 +88,7 @@ export const useStore = () => ({
 			}
 		})
 
+		// response.data: { "success": true, "data": { "id": 2, "token": "eyJ0eXAiOiJ…" } }
 		if (response.data?.data?.token) {
 			_saveUserData({ username: credentials.username, token: response.data.data.token })
 		}

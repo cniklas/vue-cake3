@@ -31,16 +31,17 @@ class UsersController extends AppController
 		$this->Crud->on('afterSave', function(Event $event) {
 			if ($event->subject->created) {
 				$this->set('data', [
-					// Your JWT token (and thus the user information) will NOT contain an id field if you choose to disable the queryDataSource option!
-					// This might break code depending on the presence of an id field but is easily solved by manually adding the id field to the JWT token.
 					'id' => $event->subject->entity->id,
 					'token' => JWT::encode(
 						[
+							// Your JWT token (and thus the user information) will NOT contain an id field if you choose to disable the queryDataSource option!
+							// This might break code depending on the presence of an id field but is easily solved by manually adding the id field to the JWT token (below `exp`).
 							'sub' => $event->subject->entity->id,
 							// Even though this is not required we are adding the JWT exp claim to the token payload so the token will expire after one week, effectively forcing the user to request a new unique token using the /token action.
-							'exp' => time() + 604800
+							'exp' => time() + 604800,
 						],
-					Security::salt())
+						Security::salt()
+					)
 				]);
 
 				$this->Crud->action()->config('serialize.data', 'data');
@@ -68,11 +69,13 @@ class UsersController extends AppController
 		$this->set([
 			'success' => true,
 			'data' => [
-				'token' => JWT::encode([
-					'sub' => $user['id'],
-					'exp' => time() + 604800
-				],
-				Security::salt())
+				'token' => JWT::encode(
+					[
+						'sub' => $user['id'],
+						'exp' => time() + 604800,
+					],
+					Security::salt()
+				)
 			],
 			'_serialize' => ['success', 'data']
 		]);
