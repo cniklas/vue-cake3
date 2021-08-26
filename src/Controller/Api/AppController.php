@@ -47,7 +47,7 @@ class AppController extends Controller
 				// /!\ ALL requests to your new API MUST use the application/vnd.api+json Accept Header
 				// /!\ ALL requests with POST data MUST use the application/vnd.api+json Content-Type Header
 				'CrudJsonApi.JsonApi',
-				'CrudJsonApi.Pagination', // Pagination != ApiPagination
+				'CrudJsonApi.Pagination',
 			]
 		]);
 

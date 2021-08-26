@@ -5,16 +5,17 @@ use App\Controller\Api\AppController;
 
 class CocktailsController extends AppController
 {
+	// https://api.cakephp.org/3.9/class-Cake.Controller.Component.PaginatorComponent.html#$_defaultConfig
 	public $paginate = [
-		'page' => 1, // Do NOT change the default `page` used for the index resultset to prevent frustrating further tests
+		'page' => 1,
 		'limit' => 10,
 		'maxLimit' => 100,
 		// 'fields' => [
 		// 	'id', 'name', 'description'
 		// ],
-		'sortWhitelist' => [
-			'id', 'name',
-		],
+		// 'sortWhitelist' => [
+		// 	'id', 'name',
+		// ],
 		'sort' => 'id',
 		'direction' => 'desc',
 	];

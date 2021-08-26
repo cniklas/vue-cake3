@@ -32,8 +32,9 @@ export const useStore = () => ({
 	recordCount: computed(() => state.recordCount),
 	hasLoaded: computed(() => state.hasLoaded),
 
-	fetchCocktails: async () => {
-		const response = await axios.get('/cocktails?limit=11')
+	fetchCocktails: async (fetchAll = false) => {
+		const queryParams = fetchAll ? '?limit=100' : '?limit=11'
+		const response = await axios.get(`/cocktails${queryParams}`)
 
 		// console.table(response);
 		state.cocktails = new JsonApiResponseConverter(response.data).formattedResponse

@@ -23,7 +23,7 @@
 	</p>
 
 	<p v-if="remaining > 0">
-		<strong>… und {{ remaining }} weitere …</strong>
+		<strong style="cursor:pointer" @click="getAllCocktails">… und {{ remaining }} weitere …</strong>
 	</p>
 
 	<div v-if="hasLoaded">
@@ -38,6 +38,14 @@ import { useStore } from '../useStore'
 const { cocktails, recordCount, hasLoaded, fetchCocktails, deleteCocktail } = useStore()
 const errorCode = ref(null)
 const errorMessage = ref('')
+const handleError = error => {
+	errorCode.value = error.response?.status
+	errorMessage.value = error.response?.statusText ?? ''
+
+	if (error.response?.data?.errors?.length) {
+		errorMessage.value = error.response.data.errors[0].detail ?? errorMessage.value
+	}
+}
 
 const getCocktails = async () => {
 	errorCode.value = null
@@ -47,16 +55,21 @@ const getCocktails = async () => {
 			await fetchCocktails()
 		}
 		catch (error) {
-			errorCode.value = error.response?.status
-			errorMessage.value = error.response?.statusText ?? ''
-
-			if (error.response?.data?.errors?.length) {
-				errorMessage.value = error.response.data.errors[0].detail ?? errorMessage.value
-			}
+			handleError(error)
 		}
 	}
 }
 const remaining = computed(() => recordCount.value ? recordCount.value - cocktails.value.length : 0 )
+const getAllCocktails = async () => {
+	errorCode.value = null
+
+	try {
+		await fetchCocktails(true)
+	}
+	catch (error) {
+		handleError(error)
+	}
+}
 
 const onDelete = async id => {
 	if (confirm('Bist du sicher?')) {
