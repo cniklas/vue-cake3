@@ -12,16 +12,16 @@
 			<input v-model.trim="form.description" type="text" id="description" required>
 		</div>
 
-		<button ref="submit" type="submit" :disabled="isInputEmpty">Speichern</button>
+		<button ref="submit" type="submit" :disabled="isInputEmpty">Save</button>
 	</form>
 
 	<p v-else>
-		Cocktails werden geladen …
+		Fetching data …
 	</p>
 </template>
 
 <script setup>
-import { defineProps, ref, toRefs, toRaw, reactive, computed, onBeforeMount } from 'vue'
+import { ref, toRefs, toRaw, reactive, computed, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '../useStore'
 

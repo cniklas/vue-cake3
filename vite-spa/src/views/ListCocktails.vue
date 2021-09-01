@@ -14,16 +14,16 @@
 				</dl>
 			</router-link>
 
-			<button type="button" @click.stop="onDelete(item.id)">löschen</button>
+			<button type="button" @click.stop="onDelete(item.id)">Delete</button>
 		</div>
 	</main>
 
 	<p v-else :class="{'error-message': errorCode }">
-		{{ errorCode && errorMessage ? `${errorCode}: ${errorMessage}` : 'Cocktails werden geladen …' }}
+		{{ errorCode && errorMessage ? `${errorCode}: ${errorMessage}` : 'Fetching data …' }}
 	</p>
 
 	<p v-if="remaining > 0">
-		<strong style="cursor:pointer" @click="getAllCocktails">… und {{ remaining }} weitere …</strong>
+		<strong class="is-link" @click="getAllCocktails">… {{ remaining }} more …</strong>
 	</p>
 
 	<div v-if="hasLoaded">
@@ -147,15 +147,15 @@ onBeforeMount(() => {
 		}
 	}
 
-	.is-link {
-		cursor: pointer;
-	}
-
 	button,
 	.button {
 		background: none #fff;
 		color: inherit;
 		margin: 0;
 	}
+}
+
+.is-link {
+	cursor: pointer;
 }
 </style>

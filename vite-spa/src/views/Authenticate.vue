@@ -30,6 +30,32 @@ const toggleComponent = () => {
 </script>
 
 <style lang="scss">
+[data-page='authenticate'] {
+	background-color: hsl(210deg, 55%, 92%);
+
+	form {
+		background-color: #fff;
+		border-radius: .5rem;
+		padding: 1.5rem 1.5rem 1rem;
+		width: calc(15em + 3rem);
+
+		transform: translateY(0);
+		filter: drop-shadow(1px 2px 0.25rem hsl(0deg 0% 0% / 0.2));
+	}
+
+	form:focus-within {
+		transform: translateY(-0.25rem);
+		filter: drop-shadow(2px 4px 1rem hsl(0deg 0% 0% / 0.2));
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		form {
+			transition: filter 300ms, transform 300ms;
+			will-change: transform;
+		}
+	}
+}
+
 .auth-link {
 	font-size: 0.8em;
 

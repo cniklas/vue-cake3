@@ -12,7 +12,7 @@
 			<input v-model.trim="form.description" type="text" id="description" required>
 		</div>
 
-		<button ref="submit" type="submit" :disabled="isInputEmpty">Speichern</button>
+		<button ref="submit" type="submit" :disabled="isInputEmpty">Save</button>
 	</form>
 </template>
 

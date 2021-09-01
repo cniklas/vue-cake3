@@ -37,6 +37,7 @@ router.beforeEach((to, from, next) => {
 		return next('/authenticate')
 	}
 
+	document.body.dataset.page = to.name ?? to.path.replace('/', '')
 	next()
 })
 

@@ -14,7 +14,7 @@
 			<label for="password">Password:</label>
 			<input v-model.trim="password" type="password" id="password">
 			<div v-if="validationErrors?.password" class="input-error-message">
-				<span v-for="(error, i) in Object.keys(validationErrors.password)" :key="`username-error-${i}`">{{ validationErrors.password[error] }}</span>
+				<span v-for="(error, i) in Object.keys(validationErrors.password)" :key="`password-error-${i}`">{{ validationErrors.password[error] }}</span>
 			</div>
 		</div>
 
