@@ -2,7 +2,7 @@
 	<nav>
 		<router-link to="/">Home</router-link>
 
-	 <template v-if="user">
+		<template v-if="user">
 			<router-link to="/cocktails">Cocktails</router-link>
 			<span class="nav-welcome">Hello, {{ user?.username }}</span>
 			<button type="button" @click="logout">Log out</button>

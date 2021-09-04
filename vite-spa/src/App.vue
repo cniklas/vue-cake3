@@ -19,8 +19,8 @@ onBeforeMount(() => {
 		response => response,
 		error => {
 			// console.log(error.response)
-			// Unauthorized || Expired token
-			if (error.response?.data?.errors?.[0]?.status === 401 || error.response?.data?.errors?.[0]?.detail === 'Expired token') {
+			// CakePHP Auth: Unauthorized || Expired token
+			if (error.response?.data?.errors?.[0]?.status === '401' || error.response?.data?.errors?.[0]?.detail === 'Expired token') {
 				// router.push('/')
 				logout()
 			}
