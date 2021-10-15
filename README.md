@@ -24,7 +24,7 @@ https://www.bravo-kernel.com/2015/04/how-to-build-a-cakephp-3-rest-api-in-minute
 Jetzt ist die API nutzbar durch eine der beiden Varianten:
 
 - Aufruf im Browser: `https://localhost.test/vue-cake3/cocktails.json`
-- REST-Call: 
+- REST-Call:
 	- URL: `https://localhost.test/vue-cake3/cocktails`
 	- HTTP Method: `GET`
 	- Accept Header: `application/json`
@@ -92,7 +92,7 @@ JWT: [JSON Web Token](http://jwt.io/)
 
 ## Teil 5: JSON-API verwenden
 
-Die [JSON-API](https://jsonapi.org/) ist eine Spezifikation für (REST-)APIs bei Verwendung von JSON. Hierfür gibt es diverse Plugins für alle möglichen Programmiersprachen und Frameworks, u.a. auch für Vuex: https://github.com/mrichar1/jsonapi-vuex
+Die [JSON-API](https://jsonapi.org/) ist eine Spezifikation für (REST-)APIs bei Verwendung von JSON. Hierfür gibt es diverse Plugins für alle möglichen Programmiersprachen und Frameworks, u.a. auch für Vuex: https://github.com/mrichar1/jsonapi-vuex  
 Durch die Verwendung der JSON-API lassen sich deutlich komplexere Daten abrufen, verarbeiten und speichern; Stichwort Model-Relations, Validierung, …
 
 1. Composer-Packages aktualisieren/entfernen/ergänzen:  
@@ -122,10 +122,8 @@ z.B. `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImV4cCI6MTU5NTg3ND
 
 ## Teil 6. Frontend einrichten
 
-Im Tutorial wird Ember verwendet.  
-Vuex-Modul für Vue 2: https://github.com/mrichar1/jsonapi-vuex
+JSON:API Response Converter (kompatibel mit Vuex ORM): https://github.com/guillaumebriday/json-api-response-converter
 
-Beachte [Best practice to integrate VueJS with CakePHP 3](https://stackoverflow.com/a/51098921)
 
 ### Build-Anpassung
 
