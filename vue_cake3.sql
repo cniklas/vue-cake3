@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Jul 2021 um 09:39
--- Server-Version: 10.4.18-MariaDB
--- PHP-Version: 7.4.18
+-- Erstellungszeit: 24. Dez 2021 um 12:00
+-- Server-Version: 10.4.20-MariaDB
+-- PHP-Version: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,28 +67,6 @@ INSERT INTO `cocktails` (`id`, `name`, `description`, `created`, `modified`) VAL
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `phinxlog`
---
-
-CREATE TABLE `phinxlog` (
-  `version` bigint(20) NOT NULL,
-  `migration_name` varchar(100) DEFAULT NULL,
-  `start_time` timestamp NULL DEFAULT NULL,
-  `end_time` timestamp NULL DEFAULT NULL,
-  `breakpoint` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Daten für Tabelle `phinxlog`
---
-
-INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
-(20150411161731, 'Initial', '2019-08-24 17:42:26', '2019-08-24 17:42:26', 0),
-(20150420112310, 'Users', '2019-08-25 17:48:05', '2019-08-25 17:48:05', 0);
-
--- --------------------------------------------------------
-
---
 -- Tabellenstruktur für Tabelle `users`
 --
 
@@ -118,12 +96,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `active`, `created`, `modifie
 --
 ALTER TABLE `cocktails`
   ADD PRIMARY KEY (`id`);
-
---
--- Indizes für die Tabelle `phinxlog`
---
-ALTER TABLE `phinxlog`
-  ADD PRIMARY KEY (`version`);
 
 --
 -- Indizes für die Tabelle `users`
