@@ -40,7 +40,7 @@ class UsersController extends AppController
 							// Even though this is not required we are adding the JWT exp claim to the token payload so the token will expire after one week, effectively forcing the user to request a new unique token using the /token action.
 							'exp' => time() + 86400,
 						],
-						Security::salt()
+						Security::getSalt()
 					)
 				]);
 
@@ -74,7 +74,7 @@ class UsersController extends AppController
 						'sub' => $user['id'],
 						'exp' => time() + 86400,
 					],
-					Security::salt()
+					Security::getSalt()
 				)
 			],
 			'_serialize' => ['success', 'data']
